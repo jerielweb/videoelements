@@ -45,7 +45,7 @@ app.post('/register', async (req, res) => {
     res.json({ message: 'Usuario registrado', success: true });
   } catch (err) {
     console.error(err);
-    res.status(500).json( message: 'Error en el servidor' );
+    res.status(500).json({ message: 'Error en el servidor' });
   );
 
 // Login
