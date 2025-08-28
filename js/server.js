@@ -31,6 +31,7 @@ app.post('/register', async (req, res) => {
       'SELECT * FROM users WHERE username = 1',
       [username]
     );
+
     if (existingUser.rows.length > 0)
       return res.status(400).json( message: 'Usuario ya existe' );
 
@@ -44,6 +45,7 @@ app.post('/register', async (req, res) => {
     res.json({ message: 'Usuario registrado', success: true });
   } catch (err) {
     console.error(err);
+    res.status(500).json( message: 'Error en el servidor' );
   );
 
 // Login
