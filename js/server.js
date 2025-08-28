@@ -32,29 +32,27 @@ app.post('/register', async (req, res) => {
       [username]
     );
     if (existingUser.rows.length > 0)
-      return res.status(400).json({ message: 'Usuario ya existe' });
+      return res.status(400).json( message: 'Usuario ya existe' );
 
     const hashed = await bcrypt.hash(password, 10);
 
     await pool.query(
-      'INSERT INTO users (username, password) VALUES ($1, $2)',
+      'INSERT INTO users (username, password) VALUES (1, $2)',
       [username, hashed]
     );
 
     res.json({ message: 'Usuario registrado', success: true });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error en el servidor' });
-  }
-});
+  );
 
 // Login
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+app.post('/login', async (req, res) => 
+  const  username, password  = req.body;
 
-  try {
+  try 
     const result = await pool.query(
-      'SELECT * FROM users WHERE username = $1',
+      'SELECT * FROM users WHERE username =1',
       [username]
     );
     const user = result.rows[0];
