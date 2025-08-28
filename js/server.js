@@ -33,7 +33,7 @@ app.post('/register', async (req, res) => {
     );
 
     if (existingUser.rows.length > 0)
-      return res.status(400).json( message: 'Usuario ya existe' );
+      return res.status(400).json({ message: 'Usuario ya existe' });
 
     const hashed = await bcrypt.hash(password, 10);
 
