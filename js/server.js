@@ -44,3 +44,37 @@ app.post('/register', async (req, res) => {
 
     res.json({ message: 'Usuario registrado', success: true });
   } catch (err) {
+    console.error(err);
+
+//Login
+app.post('/login', async (req, res) => 
+  const  username, password  = req.body;
+
+  try 
+    const result = await pool.query(
+      'SELECT * FROM users WHERE username =1',
+      [username]
+    );
+
+    const user = result.rows[0];
+    if (!user)
+      return res
+        .status(401)
+        .json({ message: 'Credenciales inválidas', success: false });
+
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword)
+      return res
+        .status(401)
+        .json({ message: 'Credenciales inválidas', success: false });
+
+    res.json({ message: 'Login exitoso', success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error en el servidor' });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en puerto ${PORT}`);
+});
